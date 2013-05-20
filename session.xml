@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="ajax" method="upgrade">
+	<name>Ajax - Session</name>
+	<version>0.1</version>
+	<creationDate>May 20, 2013</creationDate>
+	<author>Matt Thomas</author>
+	<authorEmail>matt@betweenbrain.com</authorEmail>
+	<authorUrl>http://www.betweenbrain.com</authorUrl>
+	<license>GNU General Public License version 2 or later</license>
+	<copyright>Copyright (C) 2013 betweenbrain llc. All rights reserved.</copyright>
+	<description>PLG_K2_VIDEO_DATA_DESC</description>
+	<files>
+		<filename plugin="session">session.php</filename>
+	</files>
+</install>
