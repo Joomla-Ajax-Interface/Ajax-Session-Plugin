@@ -2,7 +2,7 @@ Joomla! Ajax Session Plugin
 ===================
 A companion plugin to the [Joomla Ajax Interface](https://github.com/betweenbrain/Joomla-Ajax-Interface).
 
-This plugin utilizes a PHP session array to store unique data passed to it via Ajax requests by the corresponding (Ajax Session Module)[https://github.com/betweenbrain/Ajax-Session-Module]
+This plugin utilizes a PHP session array to store unique data passed to it via Ajax requests by the corresponding [Ajax Session Module](https://github.com/betweenbrain/Ajax-Session-Module)
 
 Stable Master Branch Policy
 ====================
