@@ -20,12 +20,12 @@
 	<params>
 		<param name="arrayName"
 		       type="text"
-		       default="data"
+		       default="times"
 		       label="Session Array Name"
 		       description=""/>
 
 		<param name="dataVariable"
-		       type="text"
+		       type="time"
 		       default="value"
 		       label="Data Variable"
 		       description=""/>
