@@ -32,7 +32,7 @@ class plgAjaxSession extends JPlugin {
 		}
 
 		/*
-    	 * Populate $_SESSION[$array] only with new $value
+		 * Populate $_SESSION[$array] only with new $value
 		 */
 		if (JRequest::getVar('add')) {
 			$request = isset($_GET['add']) ? JRequest::getVar('add') : (isset($_POST['add']) ? JRequest::getVar('add') : NULL);
