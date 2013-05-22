@@ -14,14 +14,16 @@ jimport('joomla.plugin.plugin');
 
 class plgAjaxSession extends JPlugin {
 
-	/**
-	 * Plugin method with the same name as the event will be called automatically.
-	 */
 	function onAjaxSession() {
 
 		$array    = $this->params->get('arrayName');
 		$variable = $this->params->get('dataVariable');
 		$value    = JRequest::getVar($variable);
+
+		/*
+		 * Accept both $_GET and $_POST
+		 */
+		$request = isset($_GET[$variable]) ? $_GET[$variable] : (isset($_POST[$variable]) ? $_POST[$variable] : NULL);
 
 		/*
 		 * Initialize session
@@ -38,11 +40,8 @@ class plgAjaxSession extends JPlugin {
 
 		/*
 		 * Populate $_SESSION[$array] only with new $value
-		 * Using isset to not throw an error if the array exists, but is empty
 		 */
-		if (isset($_GET[$variable]) && !in_array($_GET[$variable], $_SESSION[$array])) {
-			$_SESSION[$array][] = $value;
-		} elseif (isset($_POST[$variable]) && !in_array($_POST[$variable], $_SESSION[$array])) {
+		if ($request && !in_array($request, $_SESSION[$array])) {
 			$_SESSION[$array][] = $value;
 		}
 
