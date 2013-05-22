@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install version="1.5" type="plugin" group="ajax" method="upgrade">
+<install version="1.5"
+         type="plugin"
+         group="ajax"
+         method="upgrade">
 	<name>Ajax - Session</name>
 	<version>0.1</version>
 	<creationDate>May 20, 2013</creationDate>
@@ -9,7 +12,23 @@
 	<license>GNU General Public License version 2 or later</license>
 	<copyright>Copyright (C) 2013 betweenbrain llc. All rights reserved.</copyright>
 	<description>PLG_K2_VIDEO_DATA_DESC</description>
+
 	<files>
 		<filename plugin="session">session.php</filename>
 	</files>
+
+	<params>
+		<param name="arrayName"
+		       type="text"
+		       default="data"
+		       label="Session Array Name"
+		       description=""/>
+
+		<param name="dataVariable"
+		       type="text"
+		       default="value"
+		       label="Data Variable"
+		       description=""/>
+	</params>
+
 </install>

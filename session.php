@@ -12,20 +12,49 @@
 // Import library dependencies
 jimport('joomla.plugin.plugin');
 
-class plgAjaxSession extends JPlugin
-{
+class plgAjaxSession extends JPlugin {
 
-/**
- * Plugin method with the same name as the event will be called automatically.
- */
- function onAjaxSession()
- {
-    $app = &JFactory::getApplication();
+	/**
+	 * Plugin method with the same name as the event will be called automatically.
+	 */
+	function onAjaxSession() {
 
-        // Plugin code goes here.
-        // You can access parameters via $this->params.
-    die ('It worked!');
- }
+		$array    = $this->params->get('arrayName');
+		$variable = $this->params->get('dataVariable');
+		$value    = JRequest::getVar($variable);
+
+		/*
+		 * Initialize session
+		 */
+		session_start();
+
+		/*
+		 * Create $_SESSION[$array] as array
+		 * Using isset to not throw an error
+		 */
+		if (!isset($_SESSION[$array])) {
+			$_SESSION[$array] = array();
+		}
+
+		/*
+		 * Populate $_SESSION[$array] only with new $value
+		 * Using isset to not throw an error if the array exists, but is empty
+		 */
+		if (isset($_GET[$variable]) && !in_array($_GET[$variable], $_SESSION[$array])) {
+			$_SESSION[$array][] = $value;
+		} elseif (isset($_POST[$variable]) && !in_array($_POST[$variable], $_SESSION[$array])) {
+			$_SESSION[$array][] = $value;
+		}
+
+		/*
+		 * Check for session array and return contents
+		 */
+		if ($_SESSION[$array]) {
+			return $_SESSION[$array];
+		}
+
+		return FALSE;
+	}
 }
 
 /*
