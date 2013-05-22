@@ -16,14 +16,7 @@ class plgAjaxSession extends JPlugin {
 
 	function onAjaxSession() {
 
-		$array    = $this->params->get('arrayName');
-		$variable = $this->params->get('dataVariable');
-		$value    = JRequest::getVar($variable);
-
-		/*
-		 * Accept both $_GET and $_POST
-		 */
-		$request = isset($_GET[$variable]) ? $_GET[$variable] : (isset($_POST[$variable]) ? $_POST[$variable] : NULL);
+		$array = $this->params->get('arrayName');
 
 		/*
 		 * Initialize session
@@ -39,10 +32,37 @@ class plgAjaxSession extends JPlugin {
 		}
 
 		/*
-		 * Populate $_SESSION[$array] only with new $value
+    	 * Populate $_SESSION[$array] only with new $value
 		 */
-		if ($request && !in_array($request, $_SESSION[$array])) {
-			$_SESSION[$array][] = $value;
+		if (JRequest::getVar('add')) {
+			$request = isset($_GET['add']) ? JRequest::getVar('add') : (isset($_POST['add']) ? JRequest::getVar('add') : NULL);
+
+			if ($request && !in_array($request, $_SESSION[$array])) {
+				$_SESSION[$array][] = $request;
+			}
+		}
+
+		/*
+		 * Unset array node and re-index the array
+		 */
+		if (JRequest::getVar('delete')) {
+			$request = isset($_GET['delete']) ? JRequest::getVar('delete') : (isset($_POST['delete']) ? JRequest::getVar('delete') : NULL);
+
+			if ($request && in_array($request, $_SESSION[$array])) {
+				foreach ($_SESSION[$array] as $key => $value) {
+					if ($request == $value) {
+						unset($_SESSION[$array][$key]);
+					}
+				}
+				$_SESSION[$array] = array_values($_SESSION[$array]);
+			}
+		}
+
+		/*
+		 * Destroy the session
+		 */
+		if (JRequest::getVar('destroy')) {
+			session_destroy();
 		}
 
 		/*
