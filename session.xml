@@ -11,7 +11,7 @@
 	<authorUrl>http://www.betweenbrain.com</authorUrl>
 	<license>GNU General Public License version 2 or later</license>
 	<copyright>Copyright (C) 2013 betweenbrain llc. All rights reserved.</copyright>
-	<description>PLG_K2_VIDEO_DATA_DESC</description>
+	<description>Joomla Ajax Session Plugin</description>
 
 	<files>
 		<filename plugin="session">session.php</filename>
@@ -20,14 +20,8 @@
 	<params>
 		<param name="arrayName"
 		       type="text"
-		       default="data"
+		       default="times"
 		       label="Session Array Name"
-		       description=""/>
-
-		<param name="dataVariable"
-		       type="text"
-		       default="value"
-		       label="Data Variable"
 		       description=""/>
 	</params>
 
