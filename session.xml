@@ -23,12 +23,6 @@
 		       default="times"
 		       label="Session Array Name"
 		       description=""/>
-
-		<param name="dataVariable"
-		       type="text"
-		       default="time"
-		       label="Data Variable"
-		       description=""/>
 	</params>
 
 </install>
