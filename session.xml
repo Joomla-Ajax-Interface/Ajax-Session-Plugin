@@ -25,12 +25,6 @@
 				       default="times"
 				       label="Session Array Name"
 				       description=""/>
-
-				<field name="dataVariable"
-				       type="text"
-				       default="time"
-				       label="Data Variable"
-				       description=""/>
 			</fieldset>
 		</fields>
 	</config>
