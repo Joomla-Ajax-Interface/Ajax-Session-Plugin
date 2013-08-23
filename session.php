@@ -22,7 +22,9 @@ class plgAjaxSession extends JPlugin {
 		/*
 		 * Initialize session
 		 */
-		session_start();
+		if(session_id() == '') {
+			session_start();
+		}
 
 		/*
 		 * Create $_SESSION[$array] as array
