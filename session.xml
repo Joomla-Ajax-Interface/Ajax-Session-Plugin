@@ -22,7 +22,7 @@
 			<fieldset name="basic">
 				<field name="node"
 				       type="text"
-				       default="times"
+				       default="data"
 				       label="Session Array Name"
 				       description=""/>
 			</fieldset>

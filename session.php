@@ -16,7 +16,7 @@ class plgAjaxSession extends JPlugin {
 
 	function onAjaxSession() {
 
-		$node        = $this->params->get('node');
+		$node        = htmlspecialchars($this->params->get('node'));
 		$input       = JFactory::getApplication()->input;
 		$session     = JFactory::getSession();
 		$sessionData = $session->get($node);
