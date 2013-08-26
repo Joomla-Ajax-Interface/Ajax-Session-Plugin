@@ -16,60 +16,43 @@ class plgAjaxSession extends JPlugin {
 
 	function onAjaxSession() {
 
-		$array = $this->params->get('arrayName');
+		$node        = $this->params->get('node');
+		$input       = JFactory::getApplication()->input;
+		$session     = JFactory::getSession();
+		$sessionData = $session->get($node);
 
-		/*
-		 * Initialize session
-		 */
-		session_start();
-
-		/*
-		 * Create $_SESSION[$array] as array
-		 * Using isset to not throw an error
-		 */
-		if (!isset($_SESSION[$array])) {
-			$_SESSION[$array] = array();
+		if (is_null($sessionData)) {
+			$sessionData = array();
+			$session->set($node, $sessionData);
 		}
 
-		/*
-		 * Populate $_SESSION[$array] only with new $value
-		 */
-		if (JRequest::getVar('add')) {
-			$request = isset($_GET['add']) ? JRequest::getVar('add') : (isset($_POST['add']) ? JRequest::getVar('add') : NULL);
-
-			if ($request && !in_array($request, $_SESSION[$array])) {
-				$_SESSION[$array][] = $request;
+		if ($input->get('add')) {
+			$data = $input->get('add');
+			if (!isset($sessionData[$data]) && $data != '') {
+				$sessionData[$data] = $data;
+				$session->set($node, $sessionData);
 			}
 		}
 
-		/*
-		 * Unset array node and re-index the array
-		 */
-		if (JRequest::getVar('delete')) {
-			$request = isset($_GET['delete']) ? JRequest::getVar('delete') : (isset($_POST['delete']) ? JRequest::getVar('delete') : NULL);
-
-			if ($request && in_array($request, $_SESSION[$array])) {
-				foreach ($_SESSION[$array] as $key => $value) {
-					if ($request == $value) {
-						unset($_SESSION[$array][$key]);
-					}
-				}
-				$_SESSION[$array] = array_values($_SESSION[$array]);
+		if ($input->get('delete')) {
+			$data = $input->get('delete');
+			if (isset($sessionData[$data])) {
+				unset($sessionData[$data]);
+				$session->set($node, $sessionData);
 			}
 		}
 
-		/*
-		 * Destroy the session
-		 */
-		if (JRequest::getVar('destroy')) {
-			session_destroy();
+		if ($input->get('destroy')) {
+			$sessionData = NULL;
+			$session->set($node, $sessionData);
 		}
 
-		/*
-		 * Check for session array and return contents
-		 */
-		if ($_SESSION[$array]) {
-			return $_SESSION[$array];
+		if ($input->get('debug')) {
+			die('<pre>' . print_r($sessionData, TRUE) . '</pre>');
+		}
+
+		if ($sessionData) {
+			return $sessionData;
 		}
 
 		return FALSE;

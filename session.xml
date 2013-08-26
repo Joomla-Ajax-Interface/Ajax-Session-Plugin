@@ -20,7 +20,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="arrayName"
+				<field name="node"
 				       type="text"
 				       default="times"
 				       label="Session Array Name"
